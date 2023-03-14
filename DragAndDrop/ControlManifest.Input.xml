@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="Dianamics" constructor="DragAndDrop" version="0.0.9" display-name-key="DragAndDrop" description-key="DragAndDrop description" control-type="virtual" >
+  
+    <external-service-usage enabled="false">
+      <!--UNCOMMENT TO ADD EXTERNAL DOMAINS
+      <domain></domain>
+      <domain></domain>
+      -->
+    </external-service-usage>
+    <!-- property node identifies a specific, configurable piece of data that the control expects from CDS -->
+    <property name="Name" display-name-key="Name" description-key="Name" of-type="SingleLine.Text" usage="bound" required="true" />
+    <property name="Data" display-name-key="Data" description-key="Data" of-type="SingleLine.Text" usage="bound" />
+    <property name="IconName" display-name-key="IconName" description-key="IconName" of-type="SingleLine.Text" usage="input" />
+    <property name="Dropped" display-name-key="Dropped" description-key="Dropped" of-type="Object" usage="output" />
+   
+    <property name="IsDraggable" display-name-key="IsDraggable" description-key="IsDraggable" of-type="TwoOptions" usage="bound" />
+    <property name="IsDroppable" display-name-key="IsDroppable" description-key="IsDroppable" of-type="TwoOptions" usage="bound" />
+
+
+    <property name="DroppedSchema" display-name-key="DroppedSchema" description-key="DroppedSchema" of-type="SingleLine.Text" usage="input" hidden="true"/> 
+
+    <property-dependencies>
+      <!-- Define the dependency between schema and the object type property -->
+      <property-dependency input="DroppedSchema" output="Dropped" required-for="schema" />
+    </property-dependencies>
+
+    <resources>
+      <code path="index.ts" order="1"/>
+      <platform-library name="React" version="16.8.6" />
+      <platform-library name="Fluent" version="8.29.0" />
+      <!-- UNCOMMENT TO ADD MORE RESOURCES
+      <css path="css/DragAndDrop.css" order="1" />
+      <resx path="strings/DragAndDrop.1033.resx" version="1.0.0" />
+      -->
+    </resources>
+   
+  </control>
+</manifest>
