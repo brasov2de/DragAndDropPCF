@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title>Drag and Drop</title>
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("DianamicsDraggedRow", ev.target.id);
+            changeDragImage(ev);
+            console.log('dragging ' + ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("DianamicsDraggedRow");
+            console.log('dropping ' + data);
+            //ev.target.appendChild(document.getElementById(data));
+        }
+
+        function changeDragImage(event){
+            var crt = event.target.parentElement;          
+            event.dataTransfer.setDragImage(crt, 0, 0); 
+        }
+
+        function endDrag(event){
+            var crt = event.target.parentElement;            
+        }
+    </script>
+<body>
+
+    
+<div style="background-color: yellow;display: inline-block">    
+    <div style="border-left: 4px solid red;width: 200px;height:100px">Content outside</div>
+    <div draggable="true" onDragStart="drag(event)" onDragEnd="endDrag(event)" style="width:200px;height:100px;background-color: red;">      
+        <div>I drag this</div>
+        
+    </div>
+</div>    
+
+
+    <div onDrop="drop(event)" onDragOver="allowDrop(event)" style="width: 100px;height:100px;background-color: greenyellow; ">
+        Drop here
+    </div> 
+</body>
+</html>
