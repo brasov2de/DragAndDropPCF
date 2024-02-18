@@ -7,6 +7,7 @@ export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOu
     private theComponent: ComponentFramework.ReactControl<IInputs, IOutputs>;
     private notifyOutputChanged: () => void;
     private dropped : IDropSchema;
+    private events : Array<() => void> = [];
     
     /**
      * Empty constructor.
@@ -40,7 +41,8 @@ export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOu
             isDraggable:  context.parameters.IsDraggable.raw ?? false,
             iconName: context.parameters.IconName.raw ?? "DragObject",
             setDroppedData : (data : IDropSchema) => {
-                this.dropped = data;
+                this.dropped = data;  
+                this.events.push((context as any).events?.OnDrop);
                 this.notifyOutputChanged();
             }
          };
@@ -49,11 +51,16 @@ export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOu
         );
     }
 
+   
+
     /**
      * It is called by the framework prior to a control receiving new data.
      * @returns an object based on nomenclature defined in manifest, expecting object[s] for property marked as “bound” or “output”
      */
     public getOutputs(): IOutputs {
+        //trigger the events here
+     this.events.forEach((e) => e());
+     this.events = [];  
         return {
             Dropped: this.dropped
          };
