@@ -1,13 +1,15 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
-import { Draggable, IDraggableProps } from "./Draggable";
 import * as React from "react";
-import { DropSchema, IDropSchema } from "./DragSchema";
+import { DropDataSchema, IDropDataSchema } from "./DragSchema";
+import { IDraggableProps , Draggable} from "./Draggable";
+
 
 export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOutputs> {
     private theComponent: ComponentFramework.ReactControl<IInputs, IOutputs>;
     private notifyOutputChanged: () => void;
-    private dropped : IDropSchema;
+    private dropped : IDropDataSchema;
     private events : Array<() => void> = [];
+    private onDrop: any;
     
     /**
      * Empty constructor.
@@ -27,6 +29,14 @@ export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOu
         state: ComponentFramework.Dictionary
     ): void {
         this.notifyOutputChanged = notifyOutputChanged;
+        context.mode.trackContainerResize(true);
+        this.onDrop = (context as any).events?.OnDrop;
+    }
+
+    setDroppedData(data: IDropDataSchema) {
+        this.dropped = data;  
+        this.events.push(this.onDrop);
+        this.notifyOutputChanged();
     }
 //test
     /**
@@ -35,16 +45,28 @@ export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOu
      * @returns ReactElement root react element for the control
      */
     public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {
+
+      /*  const theme = (context as any).fluentDesignLanguage ? createV8Theme(
+            (context as any).fluentDesignLanguage?.brand,
+            (context as any).fluentDesignLanguage?.theme
+          ): undefined;*/
+        
         const props: IDraggableProps = { 
             name : context.parameters.Name.raw ?? "",
-            data : context.parameters.Data.raw ?? "",
-            isDraggable:  context.parameters.IsDraggable.raw ?? false,
-            iconName: context.parameters.IconName.raw ?? "DragObject",
-            setDroppedData : (data : IDropSchema) => {
-                this.dropped = data;  
-                this.events.push((context as any).events?.OnDrop);
-                this.notifyOutputChanged();
-            }
+            data : context.parameters.DraggedData.raw ?? "",
+            isDraggable:  context.parameters.IsDraggable.raw ?? true,
+            isDroppable: context.parameters.IsDroppable.raw ?? true,
+            iconName: context.parameters.IconName.raw ?? undefined,
+            setDroppedData : this.setDroppedData.bind(this), 
+            iconAlign : context.parameters.IconAlign.raw ?? "Left", 
+            iconVerticalAlign : context.parameters.IconVerticalAlign.raw ?? "Top", 
+            depthDragImage : context.parameters.DepthDragImage.raw && context.parameters.DepthDragImage.raw>0 ? context.parameters.DepthDragImage.raw :  5, 
+            width: context.mode.allocatedWidth,
+            height: context.mode.allocatedHeight, 
+            iconColor: context.parameters.IconColor.raw  ?? undefined, 
+            iconSize: valueOrDefault(context.parameters.IconSize.raw , "xx-large"),
+            backgroundColor: valueOrDefault(context.parameters.BackgroundColor.raw, "transparent")
+           
          };
         return React.createElement(
             Draggable, props
@@ -62,7 +84,7 @@ export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOu
      this.events.forEach((e) => e());
      this.events = [];  
         return {
-            Dropped: this.dropped
+            DroppedData: this.dropped
          };
     }
 
@@ -74,7 +96,7 @@ export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOu
      */
         public async getOutputSchema(context: ComponentFramework.Context<IInputs>): Promise<Record<string, unknown>> {
             return Promise.resolve({
-                Dropped: DropSchema
+                DroppedData: DropDataSchema
             });
         }
 
@@ -85,4 +107,10 @@ export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOu
     public destroy(): void {
         // Add code to cleanup control if necessary
     }
+}
+
+function valueOrDefault<T>(value : T | undefined | null, dafultValue: T ) {
+    return value === null || value === undefined || value === "" 
+        ? dafultValue
+        : value;
 }

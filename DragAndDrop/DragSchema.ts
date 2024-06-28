@@ -1,5 +1,5 @@
 
-export const DropSchema = {
+export const DropDataSchema = {
     "$schema": "http://json-schema.org/draft-04/schema#",
     "type": "object",
     "properties": {      
@@ -9,7 +9,7 @@ export const DropSchema = {
 };
 
 
-export interface IDropSchema {
+export interface IDropDataSchema {
     Data ?: string;
     From ?: string;
 }

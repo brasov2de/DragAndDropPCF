@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="Dianamics" constructor="DragAndDrop" version="0.0.11" display-name-key="DragAndDrop" description-key="DragAndDrop description" control-type="virtual" >
+  <control namespace="Dianamics" constructor="DragAndDrop" version="1.0.5" display-name-key="DragAndDrop" description-key="DragAndDrop description" control-type="virtual" >
   
     <external-service-usage enabled="false">
       <!--UNCOMMENT TO ADD EXTERNAL DOMAINS
@@ -10,21 +10,35 @@
     </external-service-usage>
     <!-- property node identifies a specific, configurable piece of data that the control expects from CDS -->
     <property name="Name" display-name-key="Name" description-key="Name" of-type="SingleLine.Text" usage="bound" required="true" />
-    <property name="Data" display-name-key="Data" description-key="Data" of-type="SingleLine.Text" usage="bound" />
-    <property name="IconName" display-name-key="IconName" description-key="IconName" of-type="SingleLine.Text" usage="input" />
-    
-   
     <property name="IsDraggable" display-name-key="IsDraggable" description-key="IsDraggable" of-type="TwoOptions" usage="bound" />
     <property name="IsDroppable" display-name-key="IsDroppable" description-key="IsDroppable" of-type="TwoOptions" usage="bound" />
     
-    <event name="OnDrop" display-name-key="OnDrop" description-key="OnDrop" />
-    <property name="Dropped" display-name-key="Dropped" description-key="Dropped" of-type="Object" usage="output" />
+    <property name="IconName" display-name-key="IconName" description-key="IconName" of-type="SingleLine.Text" usage="bound" />
+    <property name="IconAlign" display-name-key="IconAlign" description-key="IconAlign" of-type="Enum" usage="input"  >
+        <value name="Left" display-name-key="Left" default="true">Left</value>
+        <value name="Center" display-name-key="Center" >Center</value>
+        <value name="Right" display-name-key="Right" >Right</value>
+    </property>
+    <property name="IconVerticalAlign" display-name-key="IconVerticalAlign" description-key="IconVerticalAlign" of-type="Enum" usage="input" >
+        <value name="Top" display-name-key="Top" default="true">Top</value>
+        <value name="Center" display-name-key="Center" >Center</value>
+        <value name="Bottom" display-name-key="Bottom" >Bottom</value>
+    </property>
+    <property name="IconColor" display-name-key="IconColor" description-key="IconColor" of-type="SingleLine.Text" usage="input" />
+    <property name="IconSize" display-name-key="IconSize" description-key="IconSize" of-type="SingleLine.Text" usage="input" />
+    <property name="BackgroundColor" display-name-key="BackgroundColor" description-key="BackgroundColor" of-type="SingleLine.Text" usage="input" />
 
-    <property name="DroppedSchema" display-name-key="DroppedSchema" description-key="DroppedSchema" of-type="SingleLine.Text" usage="input" hidden="true"/> 
+    <property name="DepthDragImage" display-name-key="DepthDragImage" description-key="DepthDragImage" of-type="Whole.None" usage="input" default-value="5" />
+    <property name="DraggedData" display-name-key="DraggedData" description-key="DraggedData" of-type="SingleLine.Text" usage="bound" />
+    
+    <event name="OnDrop" display-name-key="OnDrop" description-key="OnDrop" />
+    <property name="DroppedData" display-name-key="DroppedData" description-key="DroppedData" of-type="Object" usage="output" />
+
+    <property name="DroppedDataSchema" display-name-key="DroppedDataSchema" description-key="DroppedDataSchema" of-type="SingleLine.Text" usage="input" hidden="true"/> 
 
     <property-dependencies>
       <!-- Define the dependency between schema and the object type property -->
-      <property-dependency input="DroppedSchema" output="Dropped" required-for="schema" />
+      <property-dependency input="DroppedDataSchema" output="DroppedData" required-for="schema" />
     </property-dependencies>
 
     <resources>
