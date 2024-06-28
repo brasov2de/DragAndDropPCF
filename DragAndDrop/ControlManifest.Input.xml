@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="Dianamics" constructor="DragAndDrop" version="1.0.5" display-name-key="DragAndDrop" description-key="DragAndDrop description" control-type="virtual" >
+  <control namespace="Dianamics" constructor="DragAndDrop" version="1.0.9" display-name-key="DragAndDrop" description-key="DragAndDrop description" control-type="virtual" >
   
     <external-service-usage enabled="false">
       <!--UNCOMMENT TO ADD EXTERNAL DOMAINS
@@ -26,8 +26,7 @@
     </property>
     <property name="IconColor" display-name-key="IconColor" description-key="IconColor" of-type="SingleLine.Text" usage="input" />
     <property name="IconSize" display-name-key="IconSize" description-key="IconSize" of-type="SingleLine.Text" usage="input" />
-    <property name="BackgroundColor" display-name-key="BackgroundColor" description-key="BackgroundColor" of-type="SingleLine.Text" usage="input" />
-
+   
     <property name="DepthDragImage" display-name-key="DepthDragImage" description-key="DepthDragImage" of-type="Whole.None" usage="input" default-value="5" />
     <property name="DraggedData" display-name-key="DraggedData" description-key="DraggedData" of-type="SingleLine.Text" usage="bound" />
     

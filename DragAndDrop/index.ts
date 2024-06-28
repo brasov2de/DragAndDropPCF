@@ -64,8 +64,7 @@ export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOu
             width: context.mode.allocatedWidth,
             height: context.mode.allocatedHeight, 
             iconColor: context.parameters.IconColor.raw  ?? undefined, 
-            iconSize: valueOrDefault(context.parameters.IconSize.raw , "xx-large"),
-            backgroundColor: valueOrDefault(context.parameters.BackgroundColor.raw, "transparent")
+            iconSize: valueOrDefault(context.parameters.IconSize.raw , "xx-large")
            
          };
         return React.createElement(

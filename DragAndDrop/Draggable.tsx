@@ -18,10 +18,9 @@ export interface IDraggableProps {
   height ?: number;
   iconColor ?: string;
   iconSize ?: string;
-  backgroundColor ?: string;
 }
 
-function DraggableComponent ({name, data, setDroppedData, isDraggable, isDroppable, iconName, iconAlign, iconVerticalAlign, depthDragImage,   width, height, iconColor, iconSize, backgroundColor}: IDraggableProps) {
+function DraggableComponent ({name, data, setDroppedData, isDraggable, isDroppable, iconName, iconAlign, iconVerticalAlign, depthDragImage,   width, height, iconColor, iconSize}: IDraggableProps) {
   const dragStart = (event: React.DragEvent<HTMLDivElement>) => {
     event.dataTransfer.setData(`Dianamics.DragAndDrop.${name}`, data ?? "");    
 
@@ -38,7 +37,11 @@ function DraggableComponent ({name, data, setDroppedData, isDraggable, isDroppab
     var data = event.dataTransfer.getData(`Dianamics.DragAndDrop.${name}`);
     setDroppedData({
         From : `Dianamics.DragAndDrop.${name}`.replace("Dianamics.DragAndDrop.", ""), 
-        Data : data
+        Data : data, 
+        ClientX: event.clientX, 
+        ClientY: event.clientY,
+        MovementX: event.movementX,
+        MovementY: event.movementY
       });
     
   }
@@ -54,8 +57,7 @@ function DraggableComponent ({name, data, setDroppedData, isDraggable, isDroppab
       style={{
           width: width ? `${width}px` : "100%", 
           height: height ? `${height}px` : "100%", 
-          backgroundColor: backgroundColor ?? "transparent", 
-          padding: "5px"
+          padding: "2px"
         }} 
         horizontal
         horizontalAlign={iconAlign == "Center" ? "center" : iconAlign == "Left" ? "start" : "end" }
