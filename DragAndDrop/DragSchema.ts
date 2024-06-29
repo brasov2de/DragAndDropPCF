@@ -5,10 +5,8 @@ export const DropDataSchema = {
     "properties": {      
         "Data": {"type": "string"},
         "From": {"type": "string"}, 
-        "ClientX": {"type": "number"},
-        "ClientY": {"type": "number"}, 
-        "MovementX": {"type": "number"},
-        "MovementY": {"type": "number"},
+        "X": {"type": "number"},
+        "Y": {"type": "number"}
     }
 };
 
@@ -16,8 +14,6 @@ export const DropDataSchema = {
 export interface IDropDataSchema {
     Data ?: string;
     From ?: string;
-    "ClientX" ?: number;
-    "ClientY" ?: number;
-    "MovementX" ?: number;
-    "MovementY" ?: number;
+    "X" ?: number;
+    "Y" ?: number;
 }

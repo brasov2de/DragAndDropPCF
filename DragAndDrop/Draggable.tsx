@@ -22,7 +22,11 @@ export interface IDraggableProps {
 
 function DraggableComponent ({name, data, setDroppedData, isDraggable, isDroppable, iconName, iconAlign, iconVerticalAlign, depthDragImage,   width, height, iconColor, iconSize}: IDraggableProps) {
   const dragStart = (event: React.DragEvent<HTMLDivElement>) => {
-    event.dataTransfer.setData(`Dianamics.DragAndDrop.${name}`, data ?? "");    
+    event.dataTransfer.setData(`Dianamics.DragAndDrop.${name}`, data ?? ""); 
+    const offsetX = event.clientX - event.currentTarget.getBoundingClientRect().left;
+    const offsetY = event.clientY - event.currentTarget.getBoundingClientRect().top;
+   // event.dataTransfer.setData(`Dianamics.DragAndDrop.${name}.clientX`, offsetX.toString());   
+   // event.dataTransfer.setData(`Dianamics.DragAndDrop.${name}.clientY`, offsetY.toString());   
 
     const crt = getParentInDepnth(event.currentTarget, depthDragImage);
     //var crt = event.currentTarget.parentElement?.parentElement?.parentElement?.parentElement?.parentElement;     
@@ -34,14 +38,14 @@ function DraggableComponent ({name, data, setDroppedData, isDraggable, isDroppab
   const onDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     if(isDroppable === false) return;
-    var data = event.dataTransfer.getData(`Dianamics.DragAndDrop.${name}`);
+    const data = event.dataTransfer.getData(`Dianamics.DragAndDrop.${name}`);
+    //const offsetX = parseInt(event.dataTransfer.getData(`Dianamics.DragAndDrop.${name}.clientX`), 10);
+    //const offsetY = parseInt(event.dataTransfer.getData(`Dianamics.DragAndDrop.${name}.clientY`), 10);
     setDroppedData({
         From : `Dianamics.DragAndDrop.${name}`.replace("Dianamics.DragAndDrop.", ""), 
         Data : data, 
-        ClientX: event.clientX, 
-        ClientY: event.clientY,
-        MovementX: event.movementX,
-        MovementY: event.movementY
+        X:  event.clientX - event.currentTarget.getBoundingClientRect().left, 
+        Y: event.clientY - event.currentTarget.getBoundingClientRect().top
       });
     
   }
