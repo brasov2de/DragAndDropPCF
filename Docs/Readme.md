@@ -36,6 +36,21 @@ For instance: to drag an item from a gallery over a specific position inside you
     - X : the X coordinate for the drop action (relative to the PCF placement)
     - Y : the Y coordinate for the drop action (relative to the PCF placement)
 
+## Example
+
+Let's consider a Canvas App, where we place the Pcf twice: once as a drag area, once as a drop area.
+We would have for drag component:
+![drag](./Images/imageDemoDrag.png)
+
+And the Drop1 as a drop component
+![drop](./Images/imageDemoDrop.png)
+
+Here the complete yaml
+![yaml](./Images/imageDemo.png)
+
+After we save and publish the app, close the designer and run the app, we can drag the red area over the drop area.
+![action](./Images/DradAndDropPCFSample.gif)
+
  ## Drop over your own PCF
 
  To be able to drop this PCF oevr your own PCF, implement the following inside your own PCF:
