@@ -38,7 +38,7 @@ For instance: to drag an item from a gallery over a specific position inside you
 
 ## Example
 
-Let's consider a Canvas App, where we place the Pcf twice: once as a drag area, once as a drop area.
+Let's consider a Canvas App, where we place the PCF twice: once as a drag area, once as a drop area.
 We would have for drag component:
 ![drag](./Images/imageDemoDrag.png)
 
@@ -48,7 +48,7 @@ And the Drop1 as a drop component
 Here the complete yaml
 ![yaml](./Images/imageDemo.png)
 
-After we save and publish the app, close the designer and run the app, we can drag the red area over the drop area.
+After we save and publish the app, close the designer and run the app, we can drag the red area over the drop area (which is not visible in the demo.. but we could place some other elements below it).
 ![action](./Images/DradAndDropPCFSample.gif)
 
  ## Drop over your own PCF
