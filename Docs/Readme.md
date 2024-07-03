@@ -9,6 +9,8 @@ It can be used as:
 
 It can be used transparent, over your container. Or you can show an icon from Fluent UI 8 library inside that div. Probably the most comon use-case for the icon, is to show that this area is draggable.
 
+**It's important to bring the Drag&Drop PCF on the top of your container**
+
 This PCF is intended to be used inside Canvas Apps or Custom Pages, but in my tests worked even inside model-driven forms.
 
 You can use it as both a source and a target of a drag&drop action, but you can use it also in combination with your own PCF.
@@ -80,4 +82,5 @@ After we save and publish the app, close the designer and run the app, we can dr
 
  - We can mimic the drag&drop only by placing this PCF over a container. The container can be a Canvas App Container, or the elements of a Gallery.
  - The drag&drop action doesn't work inside the maker portal
+ - The drag&drop PCF must be placed on top of the other controls inside your container
  - ... tbd
