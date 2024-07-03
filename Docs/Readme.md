@@ -55,7 +55,7 @@ The app in yaml:
 - the drag part
 ![yaml](./Images/Yaml_drag.png)
 - the drop part (the drop PCF is over a container (purple) with a label). 
-![yaml](./Images/Yaml_drop.png)
+![yaml](./Images/yaml_drop.png)
 
 After we save and publish the app, close the designer and run the app, we can drag the red area over the drop area (which is not visible in the demo.. but we could place some other elements below it).
 ![action](./Images/DragAndDropPCFDemo.gif)
