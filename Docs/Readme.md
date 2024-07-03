@@ -60,8 +60,8 @@ The app in yaml:
 After we save and publish the app, close the designer and run the app, we can drag the red area over the drop area (which is not visible in the demo.. but we could place some other elements below it).
 ![action](./Images/DragAndDropPCFDemo.gif)
 
-To try out this demo, [you can find the App/Solution here](./DemoApp/Solution.xml)
-
+To try out this demo, [you can find the App/Solution here](./DemoApp/DragAndDropDemo_1_0_0_1.zip) 
+ 
  ## Drop over your own PCF
 
  To be able to drop this PCF oevr your own PCF, implement the following inside your own PCF:
