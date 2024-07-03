@@ -45,11 +45,20 @@ We would have for drag component:
 And the Drop1 as a drop component
 ![drop](./Images/imageDemoDrop.png)
 
-Here the complete yaml
-![yaml](./Images/imageDemo.png)
+For both the drag and drop component, we need to place it on top of the other components, and cover the complete drop zone (in my case, x:0, Y:0, Width: Parent.Width, Height: Parent.Height)
+![coverTop](./Images/imageDemoDrop_OnTop.png)
+
+The app in yaml:
+
+- the drag part
+![yaml](./Images/Yaml_drag.png)
+- the drop part (the drop PCF is over a container (purple) with a label). 
+![yaml](./Images/Yaml_drop.png)
 
 After we save and publish the app, close the designer and run the app, we can drag the red area over the drop area (which is not visible in the demo.. but we could place some other elements below it).
-![action](./Images/DradAndDropPCFSample.gif)
+![action](./Images/DragAndDropPCFDemo.gif)
+
+To try out this demo, [you can find the App/Solution here](./DemoApp/Solution.xml)
 
  ## Drop over your own PCF
 
