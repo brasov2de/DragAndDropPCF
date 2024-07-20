@@ -5,7 +5,7 @@ import { Stack } from '@fluentui/react/lib/Stack';
 import { Label } from '@fluentui/react/lib/Label';
 
 export interface IDraggableProps {
-  name?: string;
+  name: string;
   data ?: string;
   isDraggable?: boolean;
   isDroppable?: boolean;
@@ -14,50 +14,78 @@ export interface IDraggableProps {
   iconVerticalAlign?: "Top" | "Bottom" | "Center";
   depthDragImage: number;
   setDroppedData : (data: IDropDataSchema) => void;
+  setIsDragging : (isDragging: boolean) => void;
   width ?: number,
   height ?: number;
   iconColor ?: string;
   iconSize ?: string;
 }
 
-function DraggableComponent ({name, data, setDroppedData, isDraggable, isDroppable, iconName, iconAlign, iconVerticalAlign, depthDragImage,   width, height, iconColor, iconSize}: IDraggableProps) {
+function DraggableComponent ({name, data, setDroppedData, setIsDragging, isDraggable, isDroppable, iconName, iconAlign, iconVerticalAlign, depthDragImage,   width, height, iconColor, iconSize}: IDraggableProps) {
+  
+
   const dragStart = (event: React.DragEvent<HTMLDivElement>) => {
-    event.dataTransfer.setData(`Dianamics.DragAndDrop.${name}`, data ?? ""); 
-    const offsetX = event.clientX - event.currentTarget.getBoundingClientRect().left;
-    const offsetY = event.clientY - event.currentTarget.getBoundingClientRect().top;
-   // event.dataTransfer.setData(`Dianamics.DragAndDrop.${name}.clientX`, offsetX.toString());   
-   // event.dataTransfer.setData(`Dianamics.DragAndDrop.${name}.clientY`, offsetY.toString());   
+    event.dataTransfer.setData(`dianamics.draganddrop.${name}`, name); 
+    event.dataTransfer.setData(`dianamics.draganddrop.data`, data ?? "");     
+    //const offsetX = event.clientX - event.currentTarget.getBoundingClientRect().left;
+    //const offsetY = event.clientY - event.currentTarget.getBoundingClientRect().top;
+   // event.dataTransfer.setData(`dianamics.draganddrop.${name}.clientX`, offsetX.toString());   
+   // event.dataTransfer.setData(`dianamics.draganddrop.${name}.clientY`, offsetY.toString());   
 
     const crt = getParentInDepnth(event.currentTarget, depthDragImage);
     //var crt = event.currentTarget.parentElement?.parentElement?.parentElement?.parentElement?.parentElement;     
     if(crt){     
       event.dataTransfer.setDragImage(crt, 0, 0); 
-    }
+    }    
+    setIsDragging(true);
   }  
+
+  const dragEnd = (event: React.DragEvent<HTMLDivElement>) => {
+    setIsDragging(false);
+  }
 
   const onDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     if(isDroppable === false) return;
-    const data = event.dataTransfer.getData(`Dianamics.DragAndDrop.${name}`);
-    //const offsetX = parseInt(event.dataTransfer.getData(`Dianamics.DragAndDrop.${name}.clientX`), 10);
-    //const offsetY = parseInt(event.dataTransfer.getData(`Dianamics.DragAndDrop.${name}.clientY`), 10);
+    const sameName = event.dataTransfer.types.includes(`dianamics.draganddrop.${name}`);
+    if(!sameName) {
+      event.preventDefault();
+      return;
+    }
+
+    const data = event.dataTransfer.getData(`dianamics.draganddrop.data`);
+    
+    //const offsetX = parseInt(event.dataTransfer.getData(`dianamics.draganddrop.${name}.clientX`), 10);
+    //const offsetY = parseInt(event.dataTransfer.getData(`dianamics.draganddrop.${name}.clientY`), 10);
+    const boundingRect = event.currentTarget.getBoundingClientRect();
+   /* console.log("drop client", event.clientX, event.clientY);
+    console.log("drop curreTarget", currentTargetRect.left, currentTargetRect.top);
+    console.log("drop offset", event.currentTarget.offsetLeft, event.currentTarget.offsetTop);
+    console.log("client offset", event.currentTarget.getClientRects());    */
+    //boundingRect.width != event.currentTarget.clientWidth --> we can calculate the transform ratio
+    const transformX  = event.currentTarget.clientWidth * 100 / boundingRect.width;
+    const transformY = event.currentTarget.clientHeight * 100 / boundingRect.height;
     setDroppedData({
-        From : `Dianamics.DragAndDrop.${name}`.replace("Dianamics.DragAndDrop.", ""), 
+        From : `dianamics.draganddrop.${name}`.replace("dianamics.draganddrop.", ""), 
         Data : data, 
-        X:  event.clientX - event.currentTarget.getBoundingClientRect().left, 
-        Y: event.clientY - event.currentTarget.getBoundingClientRect().top
+        X: Math.round((event.clientX - boundingRect.left)* transformX / 100), 
+        Y: Math.round((event.clientY - boundingRect.top) * transformY / 100)
       });
     
   }
 
   const allowDrop= (event: React.DragEvent<HTMLDivElement>) => {    
     if(isDroppable === false ) return;
+    const sameName = event.dataTransfer.types.includes(`dianamics.draganddrop.${name}`);
+    if(!sameName) {      
+      return;
+    }
     event.preventDefault();    
   }
-
+  
 
   return (
-    <Stack draggable={isDraggable} onDragStart={dragStart} onDrop={onDrop} onDragOver={allowDrop} 
+    <Stack draggable={isDraggable} onDragStart={dragStart} onDragEnd={dragEnd} onDrop={onDrop} onDragOver={allowDrop} 
       style={{
           width: width ? `${width}px` : "100%", 
           height: height ? `${height}px` : "100%", 

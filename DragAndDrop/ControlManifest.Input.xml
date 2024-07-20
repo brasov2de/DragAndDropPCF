@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="Dianamics" constructor="DragAndDrop" version="1.0.12" display-name-key="DragAndDrop" description-key="DragAndDrop description" control-type="virtual" >
+  <control namespace="Dianamics" constructor="DragAndDrop" version="1.0.22" display-name-key="DragAndDrop" description-key="DragAndDrop description" control-type="virtual" >
   
     <external-service-usage enabled="false">
       <!--UNCOMMENT TO ADD EXTERNAL DOMAINS
@@ -29,6 +29,8 @@
    
     <property name="DepthDragImage" display-name-key="DepthDragImage" description-key="DepthDragImage" of-type="Whole.None" usage="input" default-value="5" />
     <property name="DraggedData" display-name-key="DraggedData" description-key="DraggedData" of-type="SingleLine.Text" usage="bound" />
+
+    <property name="IsDragging" display-name-key="IsDragging" description-key="IsDragging" of-type="TwoOptions" usage="output" />
     
     <event name="OnDrop" display-name-key="OnDrop" description-key="OnDrop" />
     <property name="DroppedData" display-name-key="DroppedData" description-key="DroppedData" of-type="Object" usage="output" />

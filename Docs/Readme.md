@@ -29,6 +29,7 @@ For instance: to drag an item from a gallery over a specific position inside you
  - **IconVerticalAlign** - Vertical alignment if the icon, inside the containing DIV. You can choose from "Top", "Center", "Bottom"
  - **IconColor** - a string representing the color of the icon
  - **IconSize** - css fontSize property
+ - **IsDragging** - if the PCF is draggable, this will tell is it's currently being dragged. (true after is starts dragging, false when the user stopps dragging)
  - **DepthDragImage** - This PCF is placed over a container, to mimic the drag&drop of the underlying container your choose. During the drag&drop you want the user to see what exactly they are dragging. This parameter allows you to specify how deep to look for the parentElement in order to show the image being dragged. It has nothing to do withe drag data being dragged, is only about the image shown during the drag&drop action. It will make a screenshot of that parentElement. I've made good tests with DepthDragImage = "5" or "6" (but depends on your intent).
 
  - **OnDrop** event -  If you are using the PCF as a drop target, you get an **OnDrop** event. 

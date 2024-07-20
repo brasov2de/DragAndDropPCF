@@ -10,6 +10,7 @@ export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOu
     private dropped : IDropDataSchema;
     private events : Array<() => void> = [];
     private onDrop: any;
+    private isDragging: boolean = false;
     
     /**
      * Empty constructor.
@@ -38,6 +39,11 @@ export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOu
         this.events.push(this.onDrop);
         this.notifyOutputChanged();
     }
+
+    setIsDragging(isDragging: boolean) {
+        this.isDragging = isDragging;
+        this.notifyOutputChanged();
+    }
 //test
     /**
      * Called when any value in the property bag has changed. This includes field values, data-sets, global values such as container height and width, offline status, control metadata values such as label, visible, etc.
@@ -52,12 +58,13 @@ export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOu
           ): undefined;*/
         
         const props: IDraggableProps = { 
-            name : context.parameters.Name.raw ?? "",
+            name : context.parameters.Name.raw?.toLowerCase() ?? "",
             data : context.parameters.DraggedData.raw ?? "",
             isDraggable:  context.parameters.IsDraggable.raw ?? true,
             isDroppable: context.parameters.IsDroppable.raw ?? true,
             iconName: context.parameters.IconName.raw ?? undefined,
             setDroppedData : this.setDroppedData.bind(this), 
+            setIsDragging : this.setIsDragging.bind(this),
             iconAlign : context.parameters.IconAlign.raw ?? "Left", 
             iconVerticalAlign : context.parameters.IconVerticalAlign.raw ?? "Top", 
             depthDragImage : context.parameters.DepthDragImage.raw && context.parameters.DepthDragImage.raw>0 ? context.parameters.DepthDragImage.raw :  5, 
@@ -79,11 +86,17 @@ export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOu
      * @returns an object based on nomenclature defined in manifest, expecting object[s] for property marked as “bound” or “output”
      */
     public getOutputs(): IOutputs {
-        //trigger the events here
-     this.events.forEach((e) => e());
-     this.events = [];  
+        //trigger the events here   
+        if(this.events.length>0){     
+            window.setTimeout(() => {
+                this.events.forEach((e) => e());                
+                this.events = [];  
+            }, 0);
+            
+        }
         return {
-            DroppedData: this.dropped
+            DroppedData: this.dropped, 
+            IsDragging: this.isDragging
          };
     }
 
