@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="Dianamics" constructor="DragAndDrop" version="1.0.22" display-name-key="DragAndDrop" description-key="DragAndDrop description" control-type="virtual" >
+  <control namespace="Dianamics" constructor="DragAndDrop" version="1.0.24" display-name-key="DragAndDrop" description-key="DragAndDrop description" control-type="virtual" >
   
     <external-service-usage enabled="false">
       <!--UNCOMMENT TO ADD EXTERNAL DOMAINS
@@ -9,7 +9,7 @@
       -->
     </external-service-usage>
     <!-- property node identifies a specific, configurable piece of data that the control expects from CDS -->
-    <property name="Name" display-name-key="Name" description-key="Name" of-type="SingleLine.Text" usage="bound" required="true" />
+    <property name="Name" display-name-key="Group Name" description-key="Group Name" of-type="SingleLine.Text" usage="bound" required="true" />
     <property name="IsDraggable" display-name-key="IsDraggable" description-key="IsDraggable" of-type="TwoOptions" usage="bound" />
     <property name="IsDroppable" display-name-key="IsDroppable" description-key="IsDroppable" of-type="TwoOptions" usage="bound" />
     
@@ -32,6 +32,7 @@
 
     <property name="IsDragging" display-name-key="IsDragging" description-key="IsDragging" of-type="TwoOptions" usage="output" />
     
+    <event name="OnClick" display-name-key="OnClick" description-key="OnClick" />
     <event name="OnDrop" display-name-key="OnDrop" description-key="OnDrop" />
     <property name="DroppedData" display-name-key="DroppedData" description-key="DroppedData" of-type="Object" usage="output" />
 

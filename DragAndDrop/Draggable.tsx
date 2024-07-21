@@ -19,9 +19,10 @@ export interface IDraggableProps {
   height ?: number;
   iconColor ?: string;
   iconSize ?: string;
+  callIsClicked ?: () => void;
 }
 
-function DraggableComponent ({name, data, setDroppedData, setIsDragging, isDraggable, isDroppable, iconName, iconAlign, iconVerticalAlign, depthDragImage,   width, height, iconColor, iconSize}: IDraggableProps) {
+function DraggableComponent ({name, data, setDroppedData, setIsDragging, isDraggable, isDroppable, iconName, iconAlign, iconVerticalAlign, depthDragImage,   width, height, iconColor, iconSize, callIsClicked}: IDraggableProps) {
   
 
   const dragStart = (event: React.DragEvent<HTMLDivElement>) => {
@@ -86,6 +87,7 @@ function DraggableComponent ({name, data, setDroppedData, setIsDragging, isDragg
 
   return (
     <Stack draggable={isDraggable} onDragStart={dragStart} onDragEnd={dragEnd} onDrop={onDrop} onDragOver={allowDrop} 
+      onClick={callIsClicked}
       style={{
           width: width ? `${width}px` : "100%", 
           height: height ? `${height}px` : "100%", 

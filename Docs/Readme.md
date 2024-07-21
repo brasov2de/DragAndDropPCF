@@ -33,6 +33,7 @@ For instance: to drag an item from a gallery over a specific position inside you
  - **DepthDragImage** - This PCF is placed over a container, to mimic the drag&drop of the underlying container your choose. During the drag&drop you want the user to see what exactly they are dragging. This parameter allows you to specify how deep to look for the parentElement in order to show the image being dragged. It has nothing to do withe drag data being dragged, is only about the image shown during the drag&drop action. It will make a screenshot of that parentElement. I've made good tests with DepthDragImage = "5" or "6" (but depends on your intent).
 
  - **OnDrop** event -  If you are using the PCF as a drop target, you get an **OnDrop** event. 
+ - **OnClick** event - the surface of the PCF was clicked
 
  - **DroppedData** -  For the "isDroppable" components, inside the OnDrop event, you can use the **DroppedData** to read the data being dropped. This is a JSON object with the following subproperties
     - Data - the property specified for "DraggedData" for the source PCF being dragged

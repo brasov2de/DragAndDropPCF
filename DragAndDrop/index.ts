@@ -10,6 +10,7 @@ export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOu
     private dropped : IDropDataSchema;
     private events : Array<() => void> = [];
     private onDrop: any;
+    private onClick: any;
     private isDragging: boolean = false;
     
     /**
@@ -31,7 +32,9 @@ export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOu
     ): void {
         this.notifyOutputChanged = notifyOutputChanged;
         context.mode.trackContainerResize(true);
+        this.dropped = {From: context.parameters.Name.raw ?? "", Data: "", X: 0, Y:0};
         this.onDrop = (context as any).events?.OnDrop;
+        this.onClick = (context as any).events?.OnClick;
     }
 
     setDroppedData(data: IDropDataSchema) {
@@ -42,6 +45,11 @@ export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOu
 
     setIsDragging(isDragging: boolean) {
         this.isDragging = isDragging;
+        this.notifyOutputChanged();
+    }
+
+    callIsClicked() {
+        this.events.push(this.onClick);
         this.notifyOutputChanged();
     }
 //test
@@ -71,7 +79,8 @@ export class DragAndDrop implements ComponentFramework.ReactControl<IInputs, IOu
             width: context.mode.allocatedWidth,
             height: context.mode.allocatedHeight, 
             iconColor: context.parameters.IconColor.raw  ?? undefined, 
-            iconSize: valueOrDefault(context.parameters.IconSize.raw , "xx-large")
+            iconSize: valueOrDefault(context.parameters.IconSize.raw , "xx-large"), 
+            callIsClicked: this.callIsClicked.bind(this)
            
          };
         return React.createElement(
