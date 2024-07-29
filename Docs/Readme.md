@@ -18,6 +18,8 @@ For instance: to drag an item from a gallery over a specific position inside you
 
 **Please be aware that the drag&drop doesn't work inside the maker portal. But it does work inside the App!**
 
+![dragdropdemos](./Images/MainDemoBackground.png)
+
  ## Parameters and customizing
 
  - **Name** (Optional) : the name can be used to classify the Drag&Drop components on your Canvas. It will allow to drop only over Drop&Drop components with the same name.For instance you have a group of draggable components, with the Name "leftSide", and another group named "rightSide". The user will get the visial feedback that they can drop elements from "leftSide" only over "leftSide" containers.
