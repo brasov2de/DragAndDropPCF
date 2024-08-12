@@ -96,4 +96,5 @@ To try out this demo, [you can find the App/Solution here](./DemoApp/DragAndDrop
  - We can mimic the drag&drop only by placing this PCF over a container. The container can be a Canvas App Container, or the elements of a Gallery.
  - The drag&drop action doesn't work inside the maker portal
  - The drag&drop PCF must be placed on top of the other controls inside your container
+ - HTML 5 Drag&Drop doesn't support touch gestures. Because of this, the current version of the PCF works with touch gestures only on iOS version 11+ (but not on Windows or Android)
  - ... tbd
