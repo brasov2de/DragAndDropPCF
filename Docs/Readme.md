@@ -18,6 +18,8 @@ For instance: to drag an item from a gallery over a specific position inside you
 
 **Please be aware that the drag&drop doesn't work inside the maker portal. But it does work inside the App!**
 
+![dragdropdemos](./Images/MainDemoBackground.png)
+
  ## Parameters and customizing
 
  - **Name** (Optional) : the name can be used to classify the Drag&Drop components on your Canvas. It will allow to drop only over Drop&Drop components with the same name.For instance you have a group of draggable components, with the Name "leftSide", and another group named "rightSide". The user will get the visial feedback that they can drop elements from "leftSide" only over "leftSide" containers.
@@ -94,4 +96,5 @@ To try out this demo, [you can find the App/Solution here](./DemoApp/DragAndDrop
  - We can mimic the drag&drop only by placing this PCF over a container. The container can be a Canvas App Container, or the elements of a Gallery.
  - The drag&drop action doesn't work inside the maker portal
  - The drag&drop PCF must be placed on top of the other controls inside your container
+ - HTML 5 Drag&Drop doesn't support touch gestures. Because of this, the current version of the PCF works with touch gestures only on iOS version 11+ (but not on Windows or Android)
  - ... tbd
