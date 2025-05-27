@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="Dianamics" constructor="DragAndDrop" version="1.0.24" display-name-key="DragAndDrop" description-key="DragAndDrop description" control-type="virtual" >
+  <control namespace="Dianamics" constructor="DragAndDrop" version="1.0.26" display-name-key="DragAndDrop" description-key="DragAndDrop description" control-type="virtual" >
   
     <external-service-usage enabled="false">
       <!--UNCOMMENT TO ADD EXTERNAL DOMAINS
