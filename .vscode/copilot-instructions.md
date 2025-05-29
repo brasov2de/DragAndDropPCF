@@ -1,5 +1,7 @@
 # Instructions for TypeScript PCF Project
 
+The terminal won't understand "&&" commands, so write them separately lines.
+
 ## Prerequisites
 
 - Node.js (LTS version recommended)
@@ -53,8 +55,8 @@
     npm run build
     ```
 
-2. **Create solution project:**
-    Create a subfolder namned like the project and add "Solution" to the name, e.g., `<MyControl>Solution`. 
+2. **Create solution project:**    
+    Create a solution subfolder named like the project and add "Solution" to the name, e.g., `<MyControl>Solution`. 
     Open the terminal in this folder. 
     ```
     pac solution init --publisher-name <publisherName> --publisher-prefix <prefix>
@@ -64,12 +66,13 @@
     
 
 3. **Build the solution:**
-    Increment the PCF and solutio version using 
+    Increment the PCF and solution version using. 
+    ```    
+    pac solution version --strategy solution    
+    pac pcf version --stategy manifest        
     ```
-    pac pcf version --stategy manifest
-    pac solution version --strategy solution
-    ```
-    Build the bundle in production mode:
+
+    Build the bundle in production mode, after moving back to the solution folder:
     ```
     dotnet build --configuration Release
     ```
