@@ -54,7 +54,7 @@
     ```
 
 2. **Create solution project:**
-    Create a subfolder namned like the project and add "Solution" to the name, e.g., `MyControlSolution`. 
+    Create a subfolder namned like the project and add "Solution" to the name, e.g., `<MyControl>Solution`. 
     Open the terminal in this folder. 
     ```
     pac solution init --publisher-name <publisherName> --publisher-prefix <prefix>
