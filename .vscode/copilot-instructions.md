@@ -1,6 +1,6 @@
 # Instructions for TypeScript PCF Project
 
-The terminal won't understand "&&" commands, so write them separately lines.
+The terminal won't understand "&&" commands, so write them in separately lines.
 
 ## Prerequisites
 
